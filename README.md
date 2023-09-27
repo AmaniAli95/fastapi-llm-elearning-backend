@@ -4,16 +4,13 @@ This repository contains a FastAPI backend Retrieval Augmented Generation (RAG) 
 
 ## Table of Contents
 - [Overview](#overview)
-- - [Features](#overview)
-- [Endpoints](#endpoints)
-  - [Get All Chapters](#get-all-chapters)
-  - [Add a Chapter](#add-a-chapter)
-  - [Get a Chapter by ID](#get-a-chapter-by-id)
-  - [Update a Chapter](#update-a-chapter)
-  - [Delete a Chapter](#delete-a-chapter)
-- [Error Handling](#error-handling)
-- [Contributing](#contributing)
-- [License](#license)
+- [Features](#overview)
+- [Technologies](#technologies)
+- [File Structure](#file-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
 
 ## Overview
 The backend provides RESTful APIs for:
@@ -63,7 +60,6 @@ The project is structured into distinct directories, each serving a specific pur
 This FastAPI module provides endpoints for streamlining the extraction of syllabus content from documents. When you access the `GET /extract_syllabus/{chapter_id}` endpoint, the module initiates a process that checks whether the chapter has been processed previously. It downloads and splits the chapter's content into topics and subtopics, using specific headers as markers. The resulting data undergoes further processing, resulting in a JSON output representing the syllabus content. This JSON is temporarily stored, and its location is logged. Additionally, the module offers an endpoint, `GET /extract_syllabus/{chapter_id}/status`, to retrieve the status of the extraction job. Lastly, `GET /assessments/init` initiates an assessment process, generating proficiency profiles based on user responses to questions.
 
 ## Getting Started
-
 ### Prerequisites
 - Python 3.9+
 - OpenAI API key
