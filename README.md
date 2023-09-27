@@ -14,7 +14,7 @@ The core question answering and explanations are powered by OpenAI's GPT-3 API. 
 - **User auth**: JWT-based authentication and user accounts
 - **Question API**: Submit questions, receive AI-generated answers
 - **Conversations API**: Chatbot-style conversations with the LLM
-- **Explanations API**: Ask followup questions to get explanations
+- **Explanations API**: Ask follow-up questions to get explanations
 - **Moderation**: Optional filtering of generated text
 - **Analytics**: Track usage metrics and query patterns
 
@@ -24,6 +24,30 @@ The core question answering and explanations are powered by OpenAI's GPT-3 API. 
 - **SQLAlchemy**: Database ORM
 - **LangChain**: Helper library for LLMs
 - **Docker**: Containerization
+
+## File Structure
+The project is structured into distinct directories, each serving a specific purpose. Below, we provide an in-depth breakdown of the project's file structure:
+
+### app/routers
+- **chapters.py:** This module contains routers responsible for handling `GET` requests to retrieve chapter details.
+- **courses.py:** Within this module, you'll find routers that facilitate the retrieval of course information.
+- **topics.py:** Here, you can access routers designed for fetching topic details.
+
+### db
+- **database.py:** This module houses functions responsible for core database operations, including uploading, deleting, and retrieving data from the Supabase database table.
+- **supabase.py:** In this section, you'll find functions dedicated to obtaining and managing the Supabase client.
+
+### services
+- **assessment.py:** This module plays a pivotal role in generating assessment questions, managing their distribution, analyzing user responses, and generating proficiency profiles to assess users' knowledge and skills.
+- **storage.py:** Within this module, you'll find functions crucial for effective file storage management, including `download_file`, `download_and_split_files`, and `download_and_split_files_output`. These functions handle file downloads from external sources, document splitting into smaller sections, and the management of splitting process outputs.
+- **text_extract.py:** Responsible for the extraction of syllabus content from documents, this module carries out the necessary processes to achieve efficient content extraction.
+- **text_split.py:** Managing the process of dividing documents into topics and subtopics, this module efficiently breaks down content to enable more granular access and navigation.
+
+### tasks
+- **jobs.py:** Focused on job management tasks, this module offers functions to create, update, and retrieve job statuses.
+
+### main.py
+This FastAPI module provides endpoints for streamlining the extraction of syllabus content from documents. When you access the `GET /extract_syllabus/{chapter_id}` endpoint, the module initiates a process that checks whether the chapter has been processed previously. It downloads and splits the chapter's content into topics and subtopics, using specific headers as markers. The resulting data undergoes further processing, resulting in a JSON output representing the syllabus content. This JSON is temporarily stored, and its location is logged. Additionally, the module offers an endpoint, `GET /extract_syllabus/{chapter_id}/status`, to retrieve the status of the extraction job. Lastly, `GET /assessments/init` initiates an assessment process, generating proficiency profiles based on user responses to questions.
 
 ## Getting Started
 
