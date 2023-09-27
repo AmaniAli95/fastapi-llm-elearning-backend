@@ -2,6 +2,19 @@
 
 This repository contains a FastAPI backend Retrieval Augmented Generation (RAG) application that leverages large language models (LLMs) like GPT-3.5 for question-answering capabilities.
 
+## Table of Contents
+- [Overview](#overview)
+- - [Features](#overview)
+- [Endpoints](#endpoints)
+  - [Get All Chapters](#get-all-chapters)
+  - [Add a Chapter](#add-a-chapter)
+  - [Get a Chapter by ID](#get-a-chapter-by-id)
+  - [Update a Chapter](#update-a-chapter)
+  - [Delete a Chapter](#delete-a-chapter)
+- [Error Handling](#error-handling)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Overview
 The backend provides RESTful APIs for:
 - **User management**: account creation, authentication, profiles
