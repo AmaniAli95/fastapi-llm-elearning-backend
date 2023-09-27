@@ -4,13 +4,13 @@ This repository contains a FastAPI backend Retrieval Augmented Generation (RAG) 
 
 ## Table of Contents
 - [Overview](#overview)
-- [Features](#overview)
-- [Technologies](#technologies)
-- [File Structure](#file-structure)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
+- [Features](#overview)
+- [Technologies](#technologies)
+- [File Structure](#file-structure)
 
 ## Overview
 The backend provides RESTful APIs for:
