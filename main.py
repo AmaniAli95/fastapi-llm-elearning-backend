@@ -71,13 +71,11 @@ async def split_text_into_files(chapter_id):
         temp_file_path, file_name = download_and_split_files(input_bucket_name, chapter_dir_path)
         headers_to_split_on = [("###", "Topik")]
         split_text(temp_file_path, headers_to_split_on,output_bucket_name,chapter_dir_path)
-        #parentname = generate_structure(temp_file_path) ##correctcode
         temp_file_path_output_list, file_name_list, file_location_list = download_and_split_files_output(output_bucket_name, chapter_dir_path)
         filename_without_extension = os.path.splitext(file_name)[0]
         timestamp = int(datetime.now().timestamp())
         new_filename = f"{filename_without_extension}-{timestamp}.json"
-        #df_result, vector_data_list_result = getvectorId(file_name_list, temp_file_path_output_list)  ##correctcode
-        vector_values_list = ["1b695e3f-3186-4532-951a-d5580b048d24","0439e6b3-547f-4bae-8e50-e89f76477d1e","7f82f04a-c3ad-4bac-8c86-6328bfb6bd80","c7f87502-345a-4cf1-bd26-1c018889fd8c"]   ###hardcode
+        df_result, vector_data_list_result = getvectorId(file_name_list, temp_file_path_output_list)
         output = extract_syllabus(temp_file_path_output_list, vector_values_list,file_location_list,file_name_list,chapter_id)
         output_file_path = os.path.join(tempfile.gettempdir(), new_filename)
         with open(output_file_path, "w") as output_json_file:
@@ -91,7 +89,6 @@ async def split_text_into_files(chapter_id):
         return "DONE"
 
     except Exception as e:
-        # return {e.message}
         raise HTTPException(status_code=400, detail="Invalid chapter_id")
 
 @app.get("/extract_syllabus/{chapter_id}/status")
@@ -102,14 +99,14 @@ async def show_status(chapter_id):
 @app.get("/assessments/init", response_class=CustomORJSONResponse)
 async def init_assessment(user_id, course_id,  chapter_id):
     try:
-        # generator = QuestionGenerator(user_id = user_id, course_id = course_id, chapter_id = chapter_id)
-        # generator.init_QuestionGenerator()
-        # generator.save()
+        generator = QuestionGenerator(user_id = user_id, course_id = course_id, chapter_id = chapter_id)
+        generator.init_QuestionGenerator()
+        generator.save()
         questions = get_sb().table('questions').select("id").execute()
         question_ids = [question['id'] for question in questions.data]
         engine = ProfilingEngine()
         proficiency_json, user_id = engine.analyze_responses(question_ids)
-        # engine.save_profile(proficiency_json, user_id)
+        engine.save_profile(proficiency_json, user_id)
         return Response(proficiency_json)
     except Exception as e:
         logging.error(f"An error occurred: {str(e)}")
