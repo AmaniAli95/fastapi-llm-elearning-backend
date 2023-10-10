@@ -98,7 +98,6 @@ def extract_syllabus_from_text(text_chunk, model):
             messages=conversation,
             functions=function_descriptions,
             function_call="auto",
-            headers={"Helicone-Auth": "Bearer sk-helicone-oyjd","Helicone-Cache-Enabled": "true"}
         )
     return response.choices[0].message
 
